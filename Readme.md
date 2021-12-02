@@ -62,6 +62,3 @@ HAVING COUNT(*) > 10;
 ```
 
 ---
-
-С уважением,
-Abramova Yana

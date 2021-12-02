@@ -7,6 +7,8 @@
  * должны различаться.
  */
 
+import { insertionSort, bubbleSort, getRandomInt, getFact } from "./utils";
+
 abstract class Aclass {
   Numbers: number[];
 
@@ -14,15 +16,11 @@ abstract class Aclass {
     // Конструктор принимает один параметр “n” и вызывает метод “fill”
     this.Numbers = Array(n);
     this.fill();
-    console.log(this.Numbers);
   }
 
   private fill(): void {
     //который заполняет массив Numbers случайными числами
-    this.Numbers = Array.from(
-      this.Numbers,
-      () => getRandomInt()
-    );
+    this.Numbers = Array.from(this.Numbers, () => getRandomInt());
   }
 
   factorial(): number[] {
@@ -36,25 +34,13 @@ abstract class Aclass {
 
 class Class1 extends Aclass {
   sort() {
-    return [];
+    bubbleSort(this.Numbers);
+    return this.factorial();
   }
 }
 class Class2 extends Aclass {
   sort() {
-    return [];
+    insertionSort(this.Numbers);
+    return this.factorial();
   }
 }
-
-function getRandomInt() {
-  return Math.floor(Math.random() * 10);
-}
-
-function getFact(n: number): number {
-  if (n === 0) return 1;
-  if (n === 1) return 1;
-  else {
-    return n * getFact(n - 1);
-  }
-}
-
-// console.log(new Aclass(3).factorial());
