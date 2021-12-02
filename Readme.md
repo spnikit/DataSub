@@ -23,7 +23,43 @@ StudentId | ExamName | Result
 3456 | Arithmency | Poor
 
 1. написать SQL запрос, который выводит имена и фамилии студентов у которых больше двух экзаменов с результатом меньше 3.
+
+```sql
+SELECT
+    s.FirstName, s.LastName
+FROM
+    Students AS s
+        INNER JOIN
+    Exams AS e ON s.StudentId = e.StudentId
+WHERE
+    e.Result < 3
+GROUP BY s.StudentId
+HAVING COUNT(e.ExamName) > 2
+```
+
 2. написать SQL запрос, который выводит название групп, в которых таких студентов больше 10
+
+```sql
+SELECT
+    s.Group
+FROM
+    Students AS s
+WHERE
+    s.StudentId IN (SELECT
+            s.StudentId
+        FROM
+            Students AS s
+                INNER JOIN
+            Exams AS e ON s.StudentId = e.StudentId
+        WHERE
+            e.Result < 3
+        GROUP BY s.StudentId
+        HAVING COUNT(e.ExamName) > 2)
+GROUP BY s.Group
+HAVING COUNT(*) > 10;
+
+
+```
 
 ---
 
